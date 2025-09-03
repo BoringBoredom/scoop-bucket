@@ -17,14 +17,12 @@
             "hash": "9885af8c578cbe7f094c4114dc67a3d3b79a74b276e369c3542407699e6aa034"
         }
     },
-    "pre_install": "if (!(Test-Path \"$persist_dir\\UsbTreeView.ini\")) { New-Item \"$dir\\UsbTreeView.ini\" | Out-Null }",
-    "bin": "UsbTreeView.exe",
-    "shortcuts": [
-        [
-            "UsbTreeView.exe",
-            "Uwe Sieber\\USB Device Tree Viewer"
-        ]
+    "pre_install": [
+        "Get-ChildItem -Path \"$dir\" -Recurse -File | Move-Item -Destination \"$dir\" -Force",
+        "if (!(Test-Path \"$persist_dir\\UsbTreeView.ini\")) { New-Item \"$dir\\UsbTreeView.ini\" | Out-Null }"
     ],
+    "bin": "UsbTreeView.exe",
+    "shortcuts": [["UsbTreeView.exe", "Uwe Sieber\\USB Device Tree Viewer"]],
     "persist": "UsbTreeView.ini",
     "checkver": "USB Device Tree Viewer V([\\d.]+)",
     "autoupdate": {
